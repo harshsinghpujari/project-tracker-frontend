@@ -1,27 +1,34 @@
-import { useEffect, useState } from "react";
-import api from "./services/api.js";
-
+import {Routes, Route, Link} from 'react-router-dom'
+import Login from "./pages/auth/Login.jsx";
+import Register from './pages/auth/Register.jsx';
+import AuthLayout from './layouts/AuthLayout.jsx';
 
 
 function App() {
 
-  const [data, setData] = useState(null);
-
-  useEffect( () => {
-    const fetchData = async () => {
-      const res = await api.get('/health');
-      setData(res.data);
-      console.log(res.data);
-    }
-    fetchData();
-  }, []);
-
   return (
-    <div className="text-center mt-10">
-    {
-      `response is ${data ? data.message : "loading..."}`
-    }
+    <>
+    <div className='bg-black text-white px-7'>
+      <Link to="/Login">Go to Login</Link>
+      <Link to="/Register">Go to register</Link>
+      
     </div>
+
+    {/* <Routes>
+     <Route element={<AuthLayout/>}>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/register' element={<Register/>}/>
+     </Route>
+    </Routes> */}
+        
+
+    <Routes>
+      <Route path="/login" element={ <AuthLayout><Login /></AuthLayout> } />
+      <Route path="/register" element={ <AuthLayout><Register /></AuthLayout> } /> 
+    </Routes>
+
+      
+    </>
   );
 }
 
